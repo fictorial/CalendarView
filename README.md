@@ -2,6 +2,8 @@
 
 This is a trivial calendar view for Swift 3.0+ on iOS 8+.
 
+![screenshot](https://github.com/fictorial/CalendarView/blob/master/Screenshot.png "Screenshot")
+
 ## Author
 
 Brian Hammond <brian@fictorial.com>
