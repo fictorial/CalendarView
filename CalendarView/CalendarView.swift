@@ -192,17 +192,17 @@ class CalendarView : UIView {
         selectedDate = today
     }
     
-    func advanceOneMonth() {
+  @objc func advanceOneMonth() {
         currentDate = Calendar.current.date(byAdding: .month, value: 1, to: currentDate)
         setNeedsLayout()
     }
     
-    func rewindOneMonth() {
+  @objc func rewindOneMonth() {
         currentDate = Calendar.current.date(byAdding: .month, value: -1, to: currentDate)
         setNeedsLayout()
     }
     
-    func didTap(_ recognizer: UITapGestureRecognizer) {
+  @objc func didTap(_ recognizer: UITapGestureRecognizer) {
         guard let cellView = recognizer.view as? CalendarCellView else { return }
         
         let date = cellView.date!
@@ -212,7 +212,7 @@ class CalendarView : UIView {
         }
     }
     
-    func maybeGotoToday(_ recognizer: UITapGestureRecognizer) {
+  @objc func maybeGotoToday(_ recognizer: UITapGestureRecognizer) {
         if recognizer.location(in: self).y < 40 {
             gotoToday()
         }
