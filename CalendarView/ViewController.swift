@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        print("hey!")
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +21,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    // first tried willTransition, but that didn't work (on IPad)
+    override func viewDidLayoutSubviews() {
+      super.viewDidLayoutSubviews()
+      print(UIDevice.current.orientation.isPortrait)
+    }
 }
 
