@@ -6,11 +6,16 @@
 //  Copyright © 2017 Fictorial LLC. All rights reserved.
 //
 
+// Apple Dokumentation sehr hilfreich zum Verstehen des Zusammenhangs zwischen UIViewController und UIView: https://developer.apple.com/library/archive/referencelibrary/GettingStarted/DevelopiOSAppsSwift/ConnectTheUIToCode.html#//apple_ref/doc/uid/TP40015214-CH22-SW1
+
 import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
+  //MARK: properties
+  @IBOutlet weak var cal: CalendarView!
+
+  override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         print("hey!")
@@ -28,7 +33,10 @@ class ViewController: UIViewController {
       
 //      collectionView.collectionViewLayout.invalidateLayout()
  //     collectionView.layoutIfNeeded()
-
+// (a) do some change
+///      cal.gotoToday()
+// (b) update view
+      cal.layoutSubviews()
     }
 }
 
