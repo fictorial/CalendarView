@@ -21,10 +21,14 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // first tried willTransition, but that didn't work (on IPad)
+    // first tried willTransition(...), but that didn't work (on IPad)// https://stackoverflow.com/questions/42170373/swift-viewwilltransition-not-called
     override func viewDidLayoutSubviews() {
       super.viewDidLayoutSubviews()
       print(UIDevice.current.orientation.isPortrait)
+      
+//      collectionView.collectionViewLayout.invalidateLayout()
+ //     collectionView.layoutIfNeeded()
+
     }
 }
 

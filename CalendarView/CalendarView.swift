@@ -8,6 +8,12 @@
 
 import UIKit
 
+//@IBAction func tilted(_ sender: UIViewController) {
+//
+//}
+
+//@property (nonatomic, weak) IB
+
 extension Date {
     var weekday: Int {
         return Calendar.current.component(.weekday, from: self)
@@ -33,10 +39,20 @@ class CalendarCellView: UIView {
             self.textLabel.text = "\(Calendar.current.dateComponents([.day], from: self.date).day!)"
         }
     }
-    
+    //consts!?
     let textLabel: UILabel!
     let detailLabel: UILabel!
-    
+// (1) was ist der Unterschied: let, var ... das war eigentlich var line = UIBe..()
+// (2) klappt es auch mit UIBez...!  ??, was bedeutet das ! eigentlich?
+  let line = UIBezierPath()
+  func graph(){
+    self.line.move(to: .init(x: 0, y: bounds.height/2))
+    self.line.addLine(to: .init(x: bounds.width, y: bounds.height/2))
+      UIColor.red.setStroke()
+    self.line.lineWidth=2
+    self.line.stroke()
+  }
+  
     var selected = false {
         didSet {
             self.backgroundColor = self.selected ? UIColor.init(white: 0.95, alpha: 1.0) : .white
@@ -66,6 +82,7 @@ class CalendarCellView: UIView {
 
         self.addSubview(self.textLabel)
         self.addSubview(self.detailLabel)
+// nee, klappt nicht. da muss man den draw event überschreiben   ->  self.addSubview(self.line)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -79,12 +96,21 @@ class CalendarCellView: UIView {
         
         self.detailLabel.frame = CGRect(x: 0, y: self.bounds.size.height/2, width: self.bounds.size.width, height: self.bounds.size.height/2)
     }
+  
+  override func draw(_ rect: CGRect) {
+    graph()
+  }
 }
-
+/*
+protocol TransitionViewDelegate {
+  // do something
+}
+*/
 class CalendarView : UIView {
     var dataSource: CalendarViewDataSource?
     var delegate: CalendarViewDelegate?
-    
+//    var transitionview: TransitionViewDelegate?
+  
     var currentDate: Date! {
         didSet {
             for cell in cells {
@@ -92,7 +118,7 @@ class CalendarView : UIView {
             }
         }
     }
-    
+  
     var selectedDate: Date? {
         didSet {
             guard let sd = self.selectedDate else {
@@ -218,11 +244,17 @@ class CalendarView : UIView {
         }
     }
     
-    override func layoutSubviews() {
+//  let orientationChanged = OrientationChanged()
+//  orientationChanged.delegate = self
+//  func OrientationChanged() {
+    
+//  }
+  
+  override func layoutSubviews() {
         super.layoutSubviews()
     
         monthLabel.text = monthFormatter.string(from: currentDate)
-
+  
         let firstWeekday = currentDate.firstDayOfTheMonth.weekday
         var cellDate = Calendar.current.date(byAdding: .day, value: -firstWeekday + 1, to: currentDate.firstDayOfTheMonth)!
         for i in 0..<7 {
