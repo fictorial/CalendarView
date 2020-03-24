@@ -42,12 +42,20 @@ class CalendarCellView: UIView {
     //consts!?
     let textLabel: UILabel!
     let detailLabel: UILabel!
+  
 // (1) was ist der Unterschied: let, var ... das war eigentlich var line = UIBe..()
 // (2) klappt es auch mit UIBez...!  ??, was bedeutet das ! eigentlich?
   let line = UIBezierPath()
   func graph(){
-    self.line.move(to: .init(x: 0, y: bounds.height/2))
-    self.line.addLine(to: .init(x: bounds.width, y: bounds.height/2))
+    // horiz.line
+    self.line.move(to: .init(x: 0, y: bounds.height))
+    self.line.addLine(to: .init(x: bounds.width, y: bounds.height))
+      UIColor.red.setStroke()
+    self.line.lineWidth=2
+    self.line.stroke()
+// vettical line
+    self.line.move(to: .init(x: bounds.width, y: 0))
+    self.line.addLine(to: .init(x: bounds.width, y: bounds.height))
       UIColor.red.setStroke()
     self.line.lineWidth=2
     self.line.stroke()
@@ -110,6 +118,8 @@ class CalendarView : UIView {
     var dataSource: CalendarViewDataSource?
     var delegate: CalendarViewDelegate?
 //    var transitionview: TransitionViewDelegate?
+  var orientationPortrait: Bool! // variable is unwrapped
+    var viewSize: CGSize!
   
     var currentDate: Date! {
         didSet {
@@ -156,6 +166,9 @@ class CalendarView : UIView {
     }
     
     override func awakeFromNib() {
+
+        orientationPortrait = false
+        
         monthLabel = UILabel(frame: CGRect.zero)
         monthLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
         monthLabel.adjustsFontSizeToFitWidth = true
@@ -268,12 +281,32 @@ class CalendarView : UIView {
         let headerHeight: CGFloat = monthNameHeight + weekdayHeight
         
         monthLabel.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: monthNameHeight)
-        
+//    var columnCount: CGFloat;
+//    if orientationPortrait{
+//        columnCount = 6
+//    }     else{
+//        columnCount = 7
+//    }
+
+    //    CGRect visibleRect = CGRectIntersection(self.frame, superview.bounds);
+    //    var _: CGRect = self.frame.intersection(self.superview!.bounds);
+//    print(self.superview)
+    let visibleRect: CGRect = self.frame.intersection(self.superview!.frame) // ! bedeutet unwrapping
+    
         let columnCount: CGFloat = 7
         let rowCount: CGFloat = 6
-        let cellWidth = round(self.bounds.size.width / columnCount)
-        let cellHeight = round((self.bounds.size.height - headerHeight) / rowCount)
-        var left: CGFloat = 0
+        let cellWidth = round(visibleRect.width / columnCount)
+ //   var cellWidth: CGFloat;
+ //   cellWidth = round((self.bounds.size.height - headerHeight) / rowCount)
+ ///       let cellHeight = round((self.bounds.size.height - headerHeight) / rowCount)
+    var cellHeight: CGFloat;
+ //   cellHeight = round((self.bounds.size.height - headerHeight) / rowCount)
+   print("cv-b-height:\(self.bounds.size.height)")
+    print("cv-fr-height:\(self.frame.size.height)")
+    cellHeight = round((visibleRect.height - headerHeight) / rowCount)
+//    self.sizeToFit()
+    
+    var left: CGFloat = 0
         var top: CGFloat = headerHeight
 
         for i in 0..<Int(columnCount) {

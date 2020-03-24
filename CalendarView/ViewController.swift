@@ -35,8 +35,14 @@ class ViewController: UIViewController {
  //     collectionView.layoutIfNeeded()
 // (a) do some change
 ///      cal.gotoToday()
+      var viewSize: CGSize = self.view.frame.size
+      print("h:\(viewSize.height)")
+      print("w:\(viewSize.width)")
+//      cal.viewSize = viewSize
+      cal.orientationPortrait = UIDevice.current.orientation.isPortrait
 // (b) update view
-      cal.layoutSubviews()
+//      cal.layoutSubviews()
     }
+
 }
 
