@@ -105,6 +105,8 @@ class CalendarCellView: UIView {
         self.detailLabel.frame = CGRect(x: 0, y: self.bounds.size.height/2, width: self.bounds.size.width, height: self.bounds.size.height/2)
     }
   
+  // 2020-03-23, it seems to be the wrong place to call draw here,
+  // as upon re-opening the App, the lines are drawn twice
   override func draw(_ rect: CGRect) {
     graph()
   }
