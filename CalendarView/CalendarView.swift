@@ -86,6 +86,9 @@ class CalendarCellView: UIView {
 
         super.init(frame: CGRect.zero)
 
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.lightGray.cgColor
+      
         self.isUserInteractionEnabled = true
 
         self.addSubview(self.textLabel)
@@ -108,7 +111,7 @@ class CalendarCellView: UIView {
   // 2020-03-23, it seems to be the wrong place to call draw here,
   // as upon re-opening the App, the lines are drawn twice
   override func draw(_ rect: CGRect) {
-    graph()
+///    graph()
   }
 }
 /*
@@ -167,10 +170,28 @@ class CalendarView : UIView {
         return f
     }
     
+    // 2020-03-24, awakefromNib statt init??
     override func awakeFromNib() {
-
+//  override func viewDidLoad() {
         orientationPortrait = false
-        
+/*
+// https://stackoverflow.com/questions/29476587/cashapelayer-with-uibezierpath
+        let path = UIBezierPath()
+      path.move(to: .init(x: 0, y: 0))
+      path.addLine(to: .init(x: frame.size.width, y: 0))
+      path.addLine(to: .init(x: 0, y: frame.size.height))
+        path.close()
+
+        let shape = CAShapeLayer()
+        shape.frame = self.bounds
+        shape.path = path.cgPath
+        UIColor.red.setStroke()
+//        shape.fillColor = UIColor.blueColor().CGColor
+        self.layer.addSublayer(shape)
+      self.layer.mask = shape
+*/
+
+    
         monthLabel = UILabel(frame: CGRect.zero)
         monthLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
         monthLabel.adjustsFontSizeToFitWidth = true
