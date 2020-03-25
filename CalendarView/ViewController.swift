@@ -11,38 +11,36 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+  
   //MARK: properties
   @IBOutlet weak var cal: CalendarView!
-
+  
   override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        print("hey!")
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // first tried willTransition(...), but that didn't work (on IPad)// https://stackoverflow.com/questions/42170373/swift-viewwilltransition-not-called
-    override func viewDidLayoutSubviews() {
-      super.viewDidLayoutSubviews()
-      print(UIDevice.current.orientation.isPortrait)
-      
-//      collectionView.collectionViewLayout.invalidateLayout()
- //     collectionView.layoutIfNeeded()
-// (a) do some change
-///      cal.gotoToday()
-      var viewSize: CGSize = self.view.frame.size
-      print("h:\(viewSize.height)")
-      print("w:\(viewSize.width)")
-//      cal.viewSize = viewSize
-      cal.orientationPortrait = UIDevice.current.orientation.isPortrait
-// (b) update view
-//      cal.layoutSubviews()
-    }
-
+    super.viewDidLoad()
+    // Do any additional setup after loading the view, typically from a nib.
+    print("hey!")
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  // first tried willTransition(...), but that didn't work (on IPad)// https://stackoverflow.com/questions/42170373/swift-viewwilltransition-not-called
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    print(UIDevice.current.orientation.isPortrait)
+    
+    // (a) do some change
+///    cal.gotoToday()
+    var viewSize: CGSize = self.view.frame.size
+    print("h:\(viewSize.height)")
+    print("w:\(viewSize.width)")
+//    cal.viewSize = viewSize
+    cal.orientationPortrait = UIDevice.current.orientation.isPortrait
+    // (b) update view
+//    cal.layoutSubviews()
+  }
+  
 }
 
